@@ -1,16 +1,23 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
-use dioxus_logger::tracing::{Level, info};
+use dioxus_logger::tracing::{info, Level};
 
-#[derive(Clone, Routable, Debug, PartialEq)]
+use pages::home::Home;
+use pages::empty::EmptyPage;
+
+mod components;
+mod pages;
+
+#[derive(Routable, Clone)]
 enum Route {
     #[route("/")]
     Home {},
-    #[route("/blog/:id")]
-    Blog { id: i32 },
+    #[route("/empty")]
+    EmptyPage {},
+    #[route("/:..route")]
+    PageNotFound { route: Vec<String> },
 }
-
 
 fn main() {
     // Init logger
@@ -19,7 +26,6 @@ fn main() {
     launch(App);
 }
 
-
 fn App() -> Element {
     rsx! {
         Router::<Route> {}
@@ -27,29 +33,10 @@ fn App() -> Element {
 }
 
 #[component]
-fn Blog(id: i32) -> Element {
+fn PageNotFound(route: Vec<String>) -> Element {
     rsx! {
-        Link { to: Route::Home {}, "Go to counter" }
-        "Blog post {id}"
+        h1 { "Page not found" }
+        p { "We are terribly sorry, but the page you requested doesn't exist." }
+        pre { color: "red", "log:\nattemped to navigate to: {route:?}" }
     }
 }
-
-#[component]
-fn Home() -> Element {
-    let mut count = use_signal(|| 0);
-
-    rsx! {
-        Link {
-            to: Route::Blog {
-                id: count()
-            },
-            "Go to blog"
-        }
-        div {
-            h1 { "High-Five counter: {count}" }
-            button { onclick: move |_| count += 1, "Up high!" }
-            button { onclick: move |_| count -= 1, "Down low!" }
-        }
-    }
-}
-
