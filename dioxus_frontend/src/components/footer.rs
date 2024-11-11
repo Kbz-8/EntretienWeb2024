@@ -10,7 +10,7 @@ pub fn Footer() -> Element {
             style: "
                 width: 100%;
                 overflow: hidden;
-                position: absolute;
+                position: fixed;
                 left: 0;
                 bottom: 0;
             ",
