@@ -12,6 +12,8 @@ pub fn NavBar() -> Element {
                 padding: 0.25em 3em 0.5em;
                 border-bottom-style: solid;
                 border-color: #d3d2d1;
+                left: 0;
+                font-family: sans-serif;
             ",
             div {
                 style: "
@@ -22,13 +24,14 @@ pub fn NavBar() -> Element {
                     href: "/",
                     img {
                         src: "logo.jpg",
-                        width: "180px",
+                        width: "50%",
                     }
                 }
                 div {
                     style: "
                         align-items: center;
                         justify-content: center;
+                        text-align: center;
                     ",
                     ul {
                         style: "

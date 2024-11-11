@@ -8,7 +8,14 @@ use crate::components;
 pub fn EmptyPage() -> Element {
     rsx!(
         components::nav::NavBar {}
-        h1 { "Empty Page" }
+        h1 {
+            style: "
+                text-align: center;
+                 font-family: sans-serif;
+            ",
+            "Empty Page"
+        }
+        components::footer::Footer {}
     )
 }
 

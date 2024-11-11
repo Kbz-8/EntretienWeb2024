@@ -9,6 +9,10 @@ pub fn Footer() -> Element {
         footer {
             style: "
                 width: 100%;
+                overflow: hidden;
+                position: absolute;
+                left: 0;
+                bottom: 0;
             ",
             a {
                 href: "https://github.com/Kbz-8",

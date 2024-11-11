@@ -22,7 +22,6 @@ enum Route {
 fn main() {
     // Init logger
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
-    info!("starting app");
     launch(App);
 }
 
@@ -35,8 +34,20 @@ fn App() -> Element {
 #[component]
 fn PageNotFound(route: Vec<String>) -> Element {
     rsx! {
-        h1 { "Page not found" }
-        p { "We are terribly sorry, but the page you requested doesn't exist." }
-        pre { color: "red", "log:\nattemped to navigate to: {route:?}" }
+        components::nav::NavBar {}
+        h1 {
+            style: "font-family: sans-serif;",
+            "Page not found"
+        }
+        p {
+            style: "font-family: sans-serif;",
+            "We are terribly sorry, but the page you requested doesn't exist."
+        }
+        pre {
+            style: "font-family: sans-serif;",
+            color: "red",
+            "log:\nattemped to navigate to: {route:?}"
+        }
+        components::footer::Footer {}
     }
 }
