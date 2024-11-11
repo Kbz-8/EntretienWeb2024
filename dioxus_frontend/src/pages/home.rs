@@ -2,9 +2,10 @@
 
 use dioxus::prelude::*;
 use reqwest::Client;
-use common::{FormContent, News, NewsType};
+use common::News;
 
 use crate::components;
+use crate::Route;
 
 #[component]
 pub fn Home() -> Element {
@@ -56,7 +57,7 @@ fn News() -> Element {
                         margin-bottom: 100px;
                     ",
                     for new in list {
-                        div {
+                        Link {
                             style: "
                                 color: white;
                                 background-color: #00babc;
@@ -71,6 +72,7 @@ fn News() -> Element {
                                 text-overflow: ellipsis;
                                 max-height: 100px;
                             ",
+                            to: Route::NewsPage { title: new.title.clone() },
                             "{new.title}"
                         }
                     }
@@ -78,16 +80,16 @@ fn News() -> Element {
             }
         }
         Some(Err(err)) => {
-            rsx! {"An error occurred while fetching the news {err}"}
+            rsx! { "An error occurred while fetching the news {err}" }
         }
         None => {
-            rsx! {"Loading news.."}
+            rsx! { "Loading news..." }
         }
     }
 }
 
 #[component]
-fn Pedago() -> Element {
+fn Pedago() -> Element { // TODO: a real form by hand !!!
     rsx!(
         div {
             style: "

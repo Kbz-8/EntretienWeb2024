@@ -11,11 +11,11 @@ pub fn EmptyPage() -> Element {
         h1 {
             style: "
                 text-align: center;
-                 font-family: sans-serif;
+                font-family: sans-serif;
+                font-size: 60px;
             ",
             "Empty Page"
         }
         components::footer::Footer {}
     )
 }
-

@@ -1,26 +1,28 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
-use dioxus_logger::tracing::{info, Level};
+use dioxus_logger::tracing::Level;
 
 use pages::home::Home;
 use pages::empty::EmptyPage;
+use pages::news::NewsPage;
 
 mod components;
 mod pages;
 
 #[derive(Routable, Clone)]
-enum Route {
+pub enum Route {
     #[route("/")]
     Home {},
     #[route("/empty")]
     EmptyPage {},
+    #[route("/:title")]
+    NewsPage { title: String },
     #[route("/:..route")]
     PageNotFound { route: Vec<String> },
 }
 
 fn main() {
-    // Init logger
     dioxus_logger::init(Level::INFO).expect("failed to init logger");
     launch(App);
 }
